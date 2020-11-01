@@ -5,7 +5,7 @@ class Tablero {
  private:
   int M, N;
   Coche_Autonomo **Tab;
-
+  
  public:
   Tablero(int fila, int columna); 
   ~Tablero();
