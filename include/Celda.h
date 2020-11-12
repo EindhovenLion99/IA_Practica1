@@ -33,6 +33,9 @@ class Celda {
   bool isObs();
   bool isEnd();
 
+  int getX();
+  int getY();
+
   int contarVecinas(const Tablero& Tab);
 
   ostream& WriteCelda(ostream& os) const;

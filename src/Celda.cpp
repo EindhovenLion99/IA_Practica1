@@ -32,6 +32,13 @@ bool Celda::isObs() {
   return obstaculo_;
 }
 
+int Celda::getX() {
+  return posX;
+}
+
+int Celda::getY() {
+  return posY;
+}
 
 ostream& Celda::WriteCelda(ostream& os) const {
   if (coche_activo_) {
