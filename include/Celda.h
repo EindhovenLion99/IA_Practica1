@@ -18,7 +18,7 @@ class Celda {
 
   int posX;
   int posY;
-  int vacinas;
+  int vecinas;
 
  public:
   Celda();
