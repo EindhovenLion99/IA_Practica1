@@ -1,123 +1,103 @@
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include "../include/Tablero.h"
 
-#include "Celda.h"
-#include "Tablero.h"
+int main(int argc, char *argv[]) {
 
-using namespace std;
+    int pasajeros = 1;
+    cout << endl << "PRACTICA 1: Busqueda" << endl << endl;
+    cout << "Modo de Visualización: Consola" << endl;
 
+    // ************* Filas y Columnas
 
+    cout << "Introduce el numero de filas: "; 
+    int filas;
+    cin >> filas;
 
-int main() {
-  srand(time(NULL));
-  cout << endl << "PRACTICA 1: Busqueda" << endl << endl;
+    cout << "Introduce el numero de columnas: ";
+    int columnas;
+    cin >> columnas;
 
-  cout << "Introduce el numero de filas: ";
-  int filas;
-  cin >> filas;
+    // ************+ Posicion del coche
+    
+    int opc;
+    cout << endl << "Posicion del coche: Manual (0) o aleatorio (1)?: ";
+    cin >> opc;
 
-  cout << "Introduce el numero de columnas: ";
-  int columnas;
-  cin >> columnas;
+    int x_coche, y_coche;
 
-  Tablero T(filas, columnas);
-
-  int opc;
-  cout << endl << "Posicion del coche: Manual (0) o aleatorio (1)?: ";
-  cin >> opc;
-
-  int x_coche, y_coche;
-
-  if (opc > 1 || opc < 0) {
-    cout << "Introduzca una opcion valida (0/1)" << endl;
-    exit(0);
-  } else if (opc) {
-    cout << "Modo aleatorio..." << endl;
-    x_coche = rand() % filas;
-    y_coche = rand() % columnas;
-    T.setCoche(x_coche, y_coche);
-  } else {
-    cout << endl << "Modo Manual" << endl;
-    cout << "Introduzca posicion del coche x: ";
-    cin >> x_coche;
-    cout << "Introduzca posicion del coche y: ";
-    cin >> y_coche;
-    T.setCoche(x_coche, y_coche);
-  }
-
-  int Obstaculos;
-  cout << endl << "Introduce el numero de obstaculos: ";
-  cin >> Obstaculos;
-
-  cout << endl << "Manual (0) o aleatorio (1)?: ";
-  cin >> opc;
-
-  int x, y;
-
-  if (opc > 1 || opc < 0) {
-    cout << "Introduzca una opcion valida (0/1)" << endl;
-    exit(0);
-  } else if (opc) {
-    cout << "Modo aleatorio..." << endl;
-    for (int i = 0; i < Obstaculos; ++i) {
-      x = rand() % filas;
-      y = rand() % columnas;
-      if(T.isCar(x, y)){
-        --i;
-      } else {
-        T.setObstaculo(x, y);
-      }
+    if (opc > 1 || opc < 0) {
+      cout << "Introduzca una opcion valida (0/1)" << endl;
+      exit(0);
+    } else if (opc) {
+      cout << "Modo aleatorio..." << endl;
+      x_coche = rand() % filas;
+      y_coche = rand() % columnas;
+    } else {
+      cout << endl << "Modo Manual" << endl;
+      cout << "Introduzca posicion del coche x: ";
+      cin >> x_coche;
+      cout << "Introduzca posicion del coche y: ";
+      cin >> y_coche;
     }
-  } else {
-    cout << endl << "Modo Manual" << endl;
-    for (int i = 0; i < Obstaculos; ++i) {
-      cout << "Coordenada x: ";
-      cin >> x;
-      cout << "Coordenada y: ";
-      cin >> y;
-      if (T.isCar(x, y)) {
-        cout << "En esa coordenada se ubica el coche, repita..." << endl;
-        --i;
-      } else {
-        T.setObstaculo(x, y);
-      } 
-    }
-  }
 
-  cout << endl << "Posicion del final: Manual (0) o aleatorio (1)?: ";
-  cin >> opc;
+    // *********** Porcentaje de obstaculos
 
-  int x_final = x_coche;
-  int y_final = y_coche;
-  int aux = 0;
+    int obs, pea;
+    cout << "¿Porcentaje de obstaculos?" << endl;
+    cin >> obs; 
+	  cout << endl;
 
-  if (opc > 1 || opc < 0) {
-    cout << "Introduzca una opcion valida (0/1)" << endl;
-    exit(0);
-  } else if (opc) {
-    cout << "Modo aleatorio..." << endl;
-    while (T.isCar(x_final, y_final) || T.isObs(x, y)) {
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    // ************ Crear el tablero
+
+    Tablero Tablero_(filas, columnas, false, obs);
+    Tablero_.visualizar();
+
+    // *********** Posicion final
+    
+    cout << endl << "Posicion del final: Manual (0) o aleatorio (1)?: ";
+    cin >> opc;
+
+    int x, y;
+    int x_final = x_coche;
+    int y_final = y_coche;
+    int aux = 0;
+
+    if (opc > 1 || opc < 0) {
+      cout << "Introduzca una opcion valida (0/1)" << endl;
+      exit(0);
+    } else if (opc) {
+      cout << "Modo aleatorio..." << endl;
       x_final = rand() % filas;
       x = x_final;
       y_final = rand() % columnas;
       y = y_final;
-    }
-    T.setDestino(x_final, y_final);
-  } else {
-    cout << endl << "Modo Manual" << endl;
-    while (T.isCar(x_final, y_final) || T.isObs(x, y)) {
-      if (aux > 0) 
-        cout << "En esa celda se encuentra un coche o un obstaculo, repita..." << endl;
+    } else {
+      cout << endl << "Modo Manual" << endl;
       cout << "Introduzca posicion del final x: ";
       cin >> x_final;
       x = x_final;
       cout << "Introduzca posicion del final y: ";
       cin >> y_final;
       y = y_final;
-      ++aux;
     }
-    T.setDestino(x_final, y_final);
-  }
-  T.WriteTablero();
+
+    // *********** Camino minimo con Euclidea
+    
+    cout << endl << "\n\nCamino minimo con Funcion Heuristica: Distancia Euclidea \n\n";
+    Tablero_.caminoMinimo(x_coche, y_coche, x_final, y_final, pasajeros);
+    cout << "Pasajeros recogidos: " << pasajeros << endl;
+    cout << "Nodos generados: " << Tablero_.contador << endl;
+
+    Tablero_.cambiarHeuristica(true);
+    pasajeros = 1;
+    Tablero_.contador = 0;
+
+    // *********** Camino minimo con Manhattan
+
+    cout << endl << "\n\nCamino minimo con Funcion Heuristica: Distancia Manhattan \n\n";
+    Tablero_.caminoMinimo(x_coche, y_coche, x_final, y_final, pasajeros);
+    cout << "Pasajeros recogidos: " << pasajeros << endl;
+    cout << "Nodos generados: " << Tablero_.contador << endl;
+    return 0;
 }
