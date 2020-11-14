@@ -1,23 +1,16 @@
-CXX		  := g++
-CXX_FLAGS := -Wall -Wextra -std=c++14 -ggdb
+# definimos las siguientes variables:
+# C++: indicará el compilador a usar
+# C++.FLAGS: indica las opciones del compilador, en este caso -g para depurar.
 
-BIN		:= bin
-SRC		:= src
-INCLUDE	:= include
-LIB		:= lib
+PROGRAM_NAME = Coche
+OBJECTS = src/main.cpp src/Celda.cpp src/Tablero.cpp src/F_heuristica.cpp
+C++ = g++
+C++.FLAGS = -g
 
-LIBRARIES	:=
-EXECUTABLE	:= main
-
-
-all: $(BIN)/$(EXECUTABLE)
-
-run: clean all
-	clear
-	./$(BIN)/$(EXECUTABLE)
-
-$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
+ER:
+	$(C++) $(C++.FLAGS) $(OBJECTS) -o $(PROGRAM_NAME)
 
 clean:
-	-rm $(BIN)/*
+	rm $(PROGRAM_NAME)
+
+
