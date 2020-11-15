@@ -181,7 +181,7 @@ vector<Celda> Tablero::Astar(unsigned int x_coche, unsigned int y_coche, unsigne
     return result;
 }
 
-void Tablero::caminoMinimo(unsigned int x_coche, unsigned int y_coche, unsigned int x_final, unsigned int y_final, int& pasajeros){
+void Tablero::caminoMinimo(unsigned int x_coche, unsigned int y_coche, unsigned int x_final, unsigned int y_final) {
 
     long t0,t1;
     resetCamino();
@@ -216,17 +216,7 @@ void Tablero::caminoMinimo(unsigned int x_coche, unsigned int y_coche, unsigned 
     cout << "Tamaño resultado: " << result.size() << endl
          << "Tiempo de ejecucion: " << time;
 
-    for (unsigned int i = 0; i < result.size(); i++) {
-        if (rejilla_[result[i].getX()][result[i].getY()].getValor() == 2) pasajeros++;
-        for(int j = 0; j < result[i].sizeVecinos(); j++) {
-            if (rejilla_[result[i].getVecino(j).first][result[i].getVecino(j).second].getValor() == 3){
-                pasajeros++;
-            }
-            if (pasajeros >= CAP_MAX_COCHE) break;
-        }
-        if (pasajeros >= CAP_MAX_COCHE) break;
-    }
-
+    
     for (unsigned int i = 0; i < result.size(); i++) {
         rejilla_[result[i].getX()][result[i].getY()].setValor(3);
     }

@@ -2,7 +2,6 @@
 
 int main(int argc, char *argv[]) {
 
-    int pasajeros = 1;
     cout << endl << "PRACTICA 1: Busqueda" << endl << endl;
     cout << "Modo de Visualización: Consola" << endl;
 
@@ -85,19 +84,16 @@ int main(int argc, char *argv[]) {
     // *********** Camino minimo con Euclidea
     
     cout << endl << "\n\nCamino minimo con Funcion Heuristica: Distancia Euclidea \n\n";
-    Tablero_.caminoMinimo(x_coche, y_coche, x_final, y_final, pasajeros);
-    cout << "Pasajeros recogidos: " << pasajeros << endl;
+    Tablero_.caminoMinimo(x_coche, y_coche, x_final, y_final);
     cout << "Nodos generados: " << Tablero_.contador << endl;
 
     Tablero_.cambiarHeuristica(true);
-    pasajeros = 1;
     Tablero_.contador = 0;
 
     // *********** Camino minimo con Manhattan
 
     cout << endl << "\n\nCamino minimo con Funcion Heuristica: Distancia Manhattan \n\n";
-    Tablero_.caminoMinimo(x_coche, y_coche, x_final, y_final, pasajeros);
-    cout << "Pasajeros recogidos: " << pasajeros << endl;
+    Tablero_.caminoMinimo(x_coche, y_coche, x_final, y_final);
     cout << "Nodos generados: " << Tablero_.contador << endl;
     return 0;
 }#include "../include/Tablero.h"
