@@ -70,7 +70,7 @@ void Tablero::setVecinos() {
     }
 }
 
-Tablero::Tablero(int x, int y, bool h, int pObst):x_(x), y_(y) {
+Tablero::Tablero(int x, int y, bool h, int xc, int yc, int pObst):x_(x), y_(y) {
 
     if (pObst < 0) porcentajeObstaculos_ = CONST_P_OBSTACULOS;
     else porcentajeObstaculos_ = pObst;
@@ -87,6 +87,7 @@ Tablero::Tablero(int x, int y, bool h, int pObst):x_(x), y_(y) {
       rejilla_.push_back(vectorY);
     }
     addObstaculos(false);
+    rejilla_[xc][yc].setValor(2);
     setVecinos();
 }
 

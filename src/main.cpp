@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 
     // ************ Crear el tablero
 
-    Tablero Tablero_(filas, columnas, false, obs);
+    Tablero Tablero_(filas, columnas, false, x_coche, y_coche, obs);
     Tablero_.visualizar();
 
     // *********** Posicion final

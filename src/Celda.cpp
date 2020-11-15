@@ -66,6 +66,7 @@ void Celda::visualizar() {
         }
         case 2: {
             cout << YELLOW << " C " << RESET;
+            break;
         }
         case 3: {
             cout << GREEN << " X " << RESET;

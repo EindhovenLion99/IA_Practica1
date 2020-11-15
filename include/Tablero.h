@@ -41,7 +41,7 @@ public:
 
     static int contador;
 
-    Tablero(int x, int y, bool h, int pObst = CONST_P_OBSTACULOS);
+    Tablero(int x, int y, bool h, int xc, int yc, int pObst = CONST_P_OBSTACULOS);
     ~Tablero();
 
     void caminoMinimo(unsigned int x_coche, unsigned int y_coche, unsigned int x_final, unsigned int y_final);
